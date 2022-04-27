@@ -11,12 +11,34 @@ generator client {
   output   = "node_modules/.prisma/client"
 }
 
+model History {
+  id           String    @id @default(cuid())
+  date         DateTime?
+  user         User?     @relation("History_user", fields: [userId], references: [id])
+  userId       String?   @map("user")
+  entity       String    @default("")
+  entityId     String    @default("")
+  operation    String?
+  before       String?
+  after        String?
+  inputData    String?
+  resolvedData String?
+
+  @@index([userId])
+}
+
+model Historized {
+  id   String @id @default(cuid())
+  name String @default("")
+}
+
 model User {
-  id       String @id @default(cuid())
-  name     String @default("")
-  email    String @unique @default("")
-  password String
-  posts    Post[] @relation("Post_author")
+  id                String    @id @default(cuid())
+  name              String    @default("")
+  email             String    @unique @default("")
+  password          String
+  posts             Post[]    @relation("Post_author")
+  from_History_user History[] @relation("History_user")
 }
 
 model Post {
