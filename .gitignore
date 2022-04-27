@@ -1,0 +1,10 @@
+node_modules
+.keystone/admin
+.keystone/prisma
+.keystone/tests
+*.log
+
+/.env
+config.js
+
+keystone.db
