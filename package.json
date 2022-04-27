@@ -1,7 +1,6 @@
 {
-  "name": "keystone-app",
+  "name": "matcha-keystone-utils",
   "version": "1.0.0",
-  "private": true,
   "scripts": {
     "dev": "keystone dev",
     "start": "keystone start",
