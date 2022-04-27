@@ -1,4 +1,5 @@
 node_modules
+/dist
 .keystone/admin
 .keystone/prisma
 .keystone/tests

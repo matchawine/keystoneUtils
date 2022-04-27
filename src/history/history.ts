@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { graphql, list } from "@keystone-6/core"
 import {
   json,

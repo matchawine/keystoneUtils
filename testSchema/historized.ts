@@ -1,6 +1,6 @@
 import { list } from "@keystone-6/core"
 import { text } from "@keystone-6/core/fields"
-import { afterOperationSaveHistory } from "../history/history"
+import { afterOperationSaveHistory } from "../src/history/history"
 
 export const Historized = list({
   fields: {

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react"
 import { CellComponent, FieldProps } from "@keystone-6/core/types"
 import { controller } from "@keystone-6/core/fields/types/json/views"

@@ -8,7 +8,7 @@ import {
 } from "@keystone-6/core/fields"
 import { document } from "@keystone-6/fields-document"
 import { Lists } from ".keystone/types"
-import { History } from "./history/history"
+import { History } from "./src/history/history"
 import { Historized } from "./testSchema/historized"
 
 export const lists: Lists = {

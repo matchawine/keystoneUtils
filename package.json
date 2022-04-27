@@ -1,10 +1,16 @@
 {
   "name": "matcha-keystone-utils",
-  "version": "0.1.1",
+  "version": "0.2.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
   "scripts": {
     "dev": "keystone dev",
-    "start": "keystone start",
-    "build": "keystone build",
+    "ks:start": "keystone start",
+    "ks:build": "keystone build",
+    "build": "tsc",
     "postinstall": "keystone postinstall"
   },
   "dependencies": {
