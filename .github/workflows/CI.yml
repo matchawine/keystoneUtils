@@ -1,0 +1,29 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  eslint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - run: yarn install --frozen-lockfile --ignore-scripts
+
+      - name: Check ESLint
+        # https://github.com/bradennapier/eslint-plus-action/issues/72
+        uses: Maggi64/eslint-plus-action@master
+        with:
+          issueSummaryOnlyOnEvent: true
+
+  tslint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - run: yarn install --frozen-lockfile --ignore-scripts
+
+      - name: Check TypeScript
+        run: yarn tsc
