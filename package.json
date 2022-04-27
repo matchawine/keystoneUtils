@@ -1,6 +1,6 @@
 {
   "name": "matcha-keystone-utils",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -11,18 +11,18 @@
     "ks:start": "keystone start",
     "ks:build": "keystone build",
     "build": "tsc",
-    "postinstall": "keystone postinstall"
+    "ks:postinstall": "keystone postinstall"
   },
   "dependencies": {
     "typescript": "^4.5.4"
   },
   "peerDependencies": {
     "@keystone-6/core": "^1.1.0",
-    "@keystone-6/fields-document": "^1.0.1"
+    "@keystone-6/fields-document": "^2.0.0"
   },
   "devDependencies": {
     "@keystone-6/core": "^1.1.0",
-    "@keystone-6/fields-document": "^1.0.1",
+    "@keystone-6/fields-document": "^2.0.0",
     "@types/jest": "^27.0.2",
     "@typescript-eslint/eslint-plugin": "^5.21.0",
     "@typescript-eslint/parser": "^5.21.0",
