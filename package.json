@@ -11,7 +11,9 @@
     "ks:start": "keystone start",
     "ks:build": "keystone build",
     "ks:postinstall": "keystone postinstall",
-    "build": "tsc"
+    "cleanDist": "rm -rf dist",
+    "build": "yarn run cleanDist && tsc -p tsconfigBuild.json",
+    "test": "jest --runInBand --testTimeout=60000"
   },
   "dependencies": {
     "typescript": "^4.5.4"
@@ -36,7 +38,8 @@
     "eslint-plugin-react": "^7.26.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-sonarjs": "^0.13.0",
-    "jest": "^28.0.2",
+    "graphql": "^15.8.0",
+    "jest": "^27.5.1",
     "prettier": "^2.4.1",
     "ts-jest": "^27.0.5"
   }
