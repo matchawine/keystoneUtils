@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - run: yarn install --frozen-lockfile --ignore-scripts
+      - run: yarn install --production=false --frozen-lockfile --ignore-scripts
 
       - name: Check ESLint
         # https://github.com/bradennapier/eslint-plus-action/issues/72
