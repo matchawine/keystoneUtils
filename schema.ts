@@ -1,19 +1,12 @@
 import { list } from "@keystone-6/core"
-import {
-  text,
-  relationship,
-  password,
-  timestamp,
-  select,
-} from "@keystone-6/core/fields"
-import { document } from "@keystone-6/fields-document"
+import { text, password } from "@keystone-6/core/fields"
 import { Lists } from ".keystone/types"
-import { History } from "./src/history/history"
-import { Historized } from "./testSchema/historized"
+import { historyLists } from "./testSchema/history"
+import { cascadeDeleteLists } from "./testSchema/cascadeDelete"
 
 export const lists: Lists = {
-  History,
-  Historized,
+  ...historyLists,
+  ...cascadeDeleteLists,
   User: list({
     fields: {
       name: text({ validation: { isRequired: true } }),
