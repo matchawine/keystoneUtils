@@ -25,5 +25,8 @@ jobs:
 
       - run: yarn install --frozen-lockfile
 
+      - name: Make Keyston postinstall
+        run: yarn ks:postinstall
+
       - name: Check TypeScript
         run: yarn tsc
