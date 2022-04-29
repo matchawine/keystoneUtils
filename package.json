@@ -1,6 +1,6 @@
 {
   "name": "matcha-keystone-utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -10,7 +10,7 @@
     "dev": "keystone dev",
     "ks:start": "keystone start",
     "ks:build": "keystone build",
-    "postinstall": "[ -e testSchema ] && yarn ks:postinstall",
+    "postinstall": "[ -e testSchema ] && yarn ks:postinstall || echo 'no postinstall'",
     "ks:postinstall": "keystone postinstall",
     "cleanDist": "rm -rf dist",
     "build": "yarn run cleanDist && tsc -p tsconfigBuild.json",
