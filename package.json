@@ -1,6 +1,7 @@
 {
   "name": "matcha-keystone-utils",
-  "version": "1.0.1",
+  "version": "1.0.2",
+  "description": "Useful features for Keystone 6: validators, fields, componentBlocks...",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -16,6 +17,15 @@
     "build": "yarn run cleanDist && tsc -p tsconfigBuild.json",
     "test": "jest --runInBand --testTimeout=60000"
   },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/matchawine/keystoneUtils/issues"
+  },
+  "homepage": "https://github.com/matchawine/keystoneUtils#readme",
+  "keywords": [
+    "KeystoneJS",
+    "Keystone"
+  ],
   "dependencies": {
     "typescript": "^4.5.4"
   },
