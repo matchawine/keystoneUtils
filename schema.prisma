@@ -32,6 +32,33 @@ model Historized {
   name String @default("")
 }
 
+model TestRiderOTO {
+  id                      String         @id @default(cuid())
+  name                    String         @default("")
+  from_TestHorseOTO_rider TestHorseOTO[] @relation("TestHorseOTO_rider")
+}
+
+model TestHorseOTO {
+  id      String        @id @default(cuid())
+  name    String        @default("")
+  rider   TestRiderOTO? @relation("TestHorseOTO_rider", fields: [riderId], references: [id])
+  riderId String?       @map("rider")
+
+  @@index([riderId])
+}
+
+model TestRiderOTM {
+  id     String         @id @default(cuid())
+  name   String         @default("")
+  horses TestHorseOTM[] @relation("TestRiderOTM_horses")
+}
+
+model TestHorseOTM {
+  id                       String         @id @default(cuid())
+  name                     String         @default("")
+  from_TestRiderOTM_horses TestRiderOTM[] @relation("TestRiderOTM_horses")
+}
+
 model User {
   id                String    @id @default(cuid())
   name              String    @default("")

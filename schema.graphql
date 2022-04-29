@@ -207,6 +207,189 @@ input HistorizedCreateInput {
   name: String
 }
 
+type TestRiderOTO {
+  id: ID!
+  name: String
+}
+
+input TestRiderOTOWhereUniqueInput {
+  id: ID
+}
+
+input TestRiderOTOWhereInput {
+  AND: [TestRiderOTOWhereInput!]
+  OR: [TestRiderOTOWhereInput!]
+  NOT: [TestRiderOTOWhereInput!]
+  id: IDFilter
+  name: StringFilter
+}
+
+input TestRiderOTOOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+}
+
+input TestRiderOTOUpdateInput {
+  name: String
+}
+
+input TestRiderOTOUpdateArgs {
+  where: TestRiderOTOWhereUniqueInput!
+  data: TestRiderOTOUpdateInput!
+}
+
+input TestRiderOTOCreateInput {
+  name: String
+}
+
+type TestHorseOTO {
+  id: ID!
+  name: String
+  rider: TestRiderOTO
+}
+
+input TestHorseOTOWhereUniqueInput {
+  id: ID
+}
+
+input TestHorseOTOWhereInput {
+  AND: [TestHorseOTOWhereInput!]
+  OR: [TestHorseOTOWhereInput!]
+  NOT: [TestHorseOTOWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  rider: TestRiderOTOWhereInput
+}
+
+input TestHorseOTOOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+}
+
+input TestHorseOTOUpdateInput {
+  name: String
+  rider: TestRiderOTORelateToOneForUpdateInput
+}
+
+input TestRiderOTORelateToOneForUpdateInput {
+  create: TestRiderOTOCreateInput
+  connect: TestRiderOTOWhereUniqueInput
+  disconnect: Boolean
+}
+
+input TestHorseOTOUpdateArgs {
+  where: TestHorseOTOWhereUniqueInput!
+  data: TestHorseOTOUpdateInput!
+}
+
+input TestHorseOTOCreateInput {
+  name: String
+  rider: TestRiderOTORelateToOneForCreateInput
+}
+
+input TestRiderOTORelateToOneForCreateInput {
+  create: TestRiderOTOCreateInput
+  connect: TestRiderOTOWhereUniqueInput
+}
+
+type TestRiderOTM {
+  id: ID!
+  name: String
+  horses(
+    where: TestHorseOTMWhereInput! = {}
+    orderBy: [TestHorseOTMOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [TestHorseOTM!]
+  horsesCount(where: TestHorseOTMWhereInput! = {}): Int
+}
+
+input TestRiderOTMWhereUniqueInput {
+  id: ID
+}
+
+input TestRiderOTMWhereInput {
+  AND: [TestRiderOTMWhereInput!]
+  OR: [TestRiderOTMWhereInput!]
+  NOT: [TestRiderOTMWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  horses: TestHorseOTMManyRelationFilter
+}
+
+input TestHorseOTMManyRelationFilter {
+  every: TestHorseOTMWhereInput
+  some: TestHorseOTMWhereInput
+  none: TestHorseOTMWhereInput
+}
+
+input TestRiderOTMOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+}
+
+input TestRiderOTMUpdateInput {
+  name: String
+  horses: TestHorseOTMRelateToManyForUpdateInput
+}
+
+input TestHorseOTMRelateToManyForUpdateInput {
+  disconnect: [TestHorseOTMWhereUniqueInput!]
+  set: [TestHorseOTMWhereUniqueInput!]
+  create: [TestHorseOTMCreateInput!]
+  connect: [TestHorseOTMWhereUniqueInput!]
+}
+
+input TestRiderOTMUpdateArgs {
+  where: TestRiderOTMWhereUniqueInput!
+  data: TestRiderOTMUpdateInput!
+}
+
+input TestRiderOTMCreateInput {
+  name: String
+  horses: TestHorseOTMRelateToManyForCreateInput
+}
+
+input TestHorseOTMRelateToManyForCreateInput {
+  create: [TestHorseOTMCreateInput!]
+  connect: [TestHorseOTMWhereUniqueInput!]
+}
+
+type TestHorseOTM {
+  id: ID!
+  name: String
+}
+
+input TestHorseOTMWhereUniqueInput {
+  id: ID
+}
+
+input TestHorseOTMWhereInput {
+  AND: [TestHorseOTMWhereInput!]
+  OR: [TestHorseOTMWhereInput!]
+  NOT: [TestHorseOTMWhereInput!]
+  id: IDFilter
+  name: StringFilter
+}
+
+input TestHorseOTMOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+}
+
+input TestHorseOTMUpdateInput {
+  name: String
+}
+
+input TestHorseOTMUpdateArgs {
+  where: TestHorseOTMWhereUniqueInput!
+  data: TestHorseOTMUpdateInput!
+}
+
+input TestHorseOTMCreateInput {
+  name: String
+}
+
 type User {
   id: ID!
   name: String
@@ -282,6 +465,42 @@ type Mutation {
   updateHistorizeds(data: [HistorizedUpdateArgs!]!): [Historized]
   deleteHistorized(where: HistorizedWhereUniqueInput!): Historized
   deleteHistorizeds(where: [HistorizedWhereUniqueInput!]!): [Historized]
+  createTestRiderOTO(data: TestRiderOTOCreateInput!): TestRiderOTO
+  createTestRiderOTOS(data: [TestRiderOTOCreateInput!]!): [TestRiderOTO]
+  updateTestRiderOTO(
+    where: TestRiderOTOWhereUniqueInput!
+    data: TestRiderOTOUpdateInput!
+  ): TestRiderOTO
+  updateTestRiderOTOS(data: [TestRiderOTOUpdateArgs!]!): [TestRiderOTO]
+  deleteTestRiderOTO(where: TestRiderOTOWhereUniqueInput!): TestRiderOTO
+  deleteTestRiderOTOS(where: [TestRiderOTOWhereUniqueInput!]!): [TestRiderOTO]
+  createTestHorseOTO(data: TestHorseOTOCreateInput!): TestHorseOTO
+  createTestHorseOTOS(data: [TestHorseOTOCreateInput!]!): [TestHorseOTO]
+  updateTestHorseOTO(
+    where: TestHorseOTOWhereUniqueInput!
+    data: TestHorseOTOUpdateInput!
+  ): TestHorseOTO
+  updateTestHorseOTOS(data: [TestHorseOTOUpdateArgs!]!): [TestHorseOTO]
+  deleteTestHorseOTO(where: TestHorseOTOWhereUniqueInput!): TestHorseOTO
+  deleteTestHorseOTOS(where: [TestHorseOTOWhereUniqueInput!]!): [TestHorseOTO]
+  createTestRiderOTM(data: TestRiderOTMCreateInput!): TestRiderOTM
+  createTestRiderOTMS(data: [TestRiderOTMCreateInput!]!): [TestRiderOTM]
+  updateTestRiderOTM(
+    where: TestRiderOTMWhereUniqueInput!
+    data: TestRiderOTMUpdateInput!
+  ): TestRiderOTM
+  updateTestRiderOTMS(data: [TestRiderOTMUpdateArgs!]!): [TestRiderOTM]
+  deleteTestRiderOTM(where: TestRiderOTMWhereUniqueInput!): TestRiderOTM
+  deleteTestRiderOTMS(where: [TestRiderOTMWhereUniqueInput!]!): [TestRiderOTM]
+  createTestHorseOTM(data: TestHorseOTMCreateInput!): TestHorseOTM
+  createTestHorseOTMS(data: [TestHorseOTMCreateInput!]!): [TestHorseOTM]
+  updateTestHorseOTM(
+    where: TestHorseOTMWhereUniqueInput!
+    data: TestHorseOTMUpdateInput!
+  ): TestHorseOTM
+  updateTestHorseOTMS(data: [TestHorseOTMUpdateArgs!]!): [TestHorseOTM]
+  deleteTestHorseOTM(where: TestHorseOTMWhereUniqueInput!): TestHorseOTM
+  deleteTestHorseOTMS(where: [TestHorseOTMWhereUniqueInput!]!): [TestHorseOTM]
   createUser(data: UserCreateInput!): User
   createUsers(data: [UserCreateInput!]!): [User]
   updateUser(where: UserWhereUniqueInput!, data: UserUpdateInput!): User
@@ -307,6 +526,38 @@ type Query {
   ): [Historized!]
   historized(where: HistorizedWhereUniqueInput!): Historized
   historizedsCount(where: HistorizedWhereInput! = {}): Int
+  testRiderOTOS(
+    where: TestRiderOTOWhereInput! = {}
+    orderBy: [TestRiderOTOOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [TestRiderOTO!]
+  testRiderOTO(where: TestRiderOTOWhereUniqueInput!): TestRiderOTO
+  testRiderOTOSCount(where: TestRiderOTOWhereInput! = {}): Int
+  testHorseOTOS(
+    where: TestHorseOTOWhereInput! = {}
+    orderBy: [TestHorseOTOOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [TestHorseOTO!]
+  testHorseOTO(where: TestHorseOTOWhereUniqueInput!): TestHorseOTO
+  testHorseOTOSCount(where: TestHorseOTOWhereInput! = {}): Int
+  testRiderOTMS(
+    where: TestRiderOTMWhereInput! = {}
+    orderBy: [TestRiderOTMOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [TestRiderOTM!]
+  testRiderOTM(where: TestRiderOTMWhereUniqueInput!): TestRiderOTM
+  testRiderOTMSCount(where: TestRiderOTMWhereInput! = {}): Int
+  testHorseOTMS(
+    where: TestHorseOTMWhereInput! = {}
+    orderBy: [TestHorseOTMOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [TestHorseOTM!]
+  testHorseOTM(where: TestHorseOTMWhereUniqueInput!): TestHorseOTM
+  testHorseOTMSCount(where: TestHorseOTMWhereInput! = {}): Int
   users(
     where: UserWhereInput! = {}
     orderBy: [UserOrderByInput!]! = []
