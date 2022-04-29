@@ -10,6 +10,7 @@
     "dev": "keystone dev",
     "ks:start": "keystone start",
     "ks:build": "keystone build",
+    "postinstall": "[ -e testSchema ] && yarn ks:postinstall",
     "ks:postinstall": "keystone postinstall",
     "cleanDist": "rm -rf dist",
     "build": "yarn run cleanDist && tsc -p tsconfigBuild.json",
