@@ -7,4 +7,7 @@ export default {
     "**/?(*.)+(spec|test).+(ts|tsx|js)",
   ],
   setupFiles: ["./test/loadEnv.ts"],
+  globals: {
+    "ts-jest": { diagnostics: false },
+  },
 }
