@@ -1,13 +1,11 @@
 import { list } from "@keystone-6/core"
 import { relationship, text } from "@keystone-6/core/fields"
-import { testUI } from "./utils"
 import { beforeOperationDeleteOne } from "../../src/cascadeDelete"
 
 const TestRiderOTO = list({
   fields: {
     name: text(),
   },
-  ui: testUI,
 })
 
 const TestHorseOTO = list({
@@ -20,7 +18,6 @@ const TestHorseOTO = list({
       },
     }),
   },
-  ui: testUI,
 })
 
 export const testOneToOneList = { TestRiderOTO, TestHorseOTO }

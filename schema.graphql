@@ -390,6 +390,91 @@ input TestHorseOTMCreateInput {
   name: String
 }
 
+type TestHorseRelationshipRequired {
+  id: ID!
+  name: String
+}
+
+input TestHorseRelationshipRequiredWhereUniqueInput {
+  id: ID
+}
+
+input TestHorseRelationshipRequiredWhereInput {
+  AND: [TestHorseRelationshipRequiredWhereInput!]
+  OR: [TestHorseRelationshipRequiredWhereInput!]
+  NOT: [TestHorseRelationshipRequiredWhereInput!]
+  id: IDFilter
+  name: StringFilter
+}
+
+input TestHorseRelationshipRequiredOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+}
+
+input TestHorseRelationshipRequiredUpdateInput {
+  name: String
+}
+
+input TestHorseRelationshipRequiredUpdateArgs {
+  where: TestHorseRelationshipRequiredWhereUniqueInput!
+  data: TestHorseRelationshipRequiredUpdateInput!
+}
+
+input TestHorseRelationshipRequiredCreateInput {
+  name: String
+}
+
+type TestRiderRelationshipRequired {
+  id: ID!
+  name: String
+  horse: TestHorseRelationshipRequired
+}
+
+input TestRiderRelationshipRequiredWhereUniqueInput {
+  id: ID
+}
+
+input TestRiderRelationshipRequiredWhereInput {
+  AND: [TestRiderRelationshipRequiredWhereInput!]
+  OR: [TestRiderRelationshipRequiredWhereInput!]
+  NOT: [TestRiderRelationshipRequiredWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  horse: TestHorseRelationshipRequiredWhereInput
+}
+
+input TestRiderRelationshipRequiredOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+}
+
+input TestRiderRelationshipRequiredUpdateInput {
+  name: String
+  horse: TestHorseRelationshipRequiredRelateToOneForUpdateInput
+}
+
+input TestHorseRelationshipRequiredRelateToOneForUpdateInput {
+  create: TestHorseRelationshipRequiredCreateInput
+  connect: TestHorseRelationshipRequiredWhereUniqueInput
+  disconnect: Boolean
+}
+
+input TestRiderRelationshipRequiredUpdateArgs {
+  where: TestRiderRelationshipRequiredWhereUniqueInput!
+  data: TestRiderRelationshipRequiredUpdateInput!
+}
+
+input TestRiderRelationshipRequiredCreateInput {
+  name: String
+  horse: TestHorseRelationshipRequiredRelateToOneForCreateInput
+}
+
+input TestHorseRelationshipRequiredRelateToOneForCreateInput {
+  create: TestHorseRelationshipRequiredCreateInput
+  connect: TestHorseRelationshipRequiredWhereUniqueInput
+}
+
 type User {
   id: ID!
   name: String
@@ -501,6 +586,44 @@ type Mutation {
   updateTestHorseOTMS(data: [TestHorseOTMUpdateArgs!]!): [TestHorseOTM]
   deleteTestHorseOTM(where: TestHorseOTMWhereUniqueInput!): TestHorseOTM
   deleteTestHorseOTMS(where: [TestHorseOTMWhereUniqueInput!]!): [TestHorseOTM]
+  createTestHorseRelationshipRequired(
+    data: TestHorseRelationshipRequiredCreateInput!
+  ): TestHorseRelationshipRequired
+  createTestHorseRelationshipRequireds(
+    data: [TestHorseRelationshipRequiredCreateInput!]!
+  ): [TestHorseRelationshipRequired]
+  updateTestHorseRelationshipRequired(
+    where: TestHorseRelationshipRequiredWhereUniqueInput!
+    data: TestHorseRelationshipRequiredUpdateInput!
+  ): TestHorseRelationshipRequired
+  updateTestHorseRelationshipRequireds(
+    data: [TestHorseRelationshipRequiredUpdateArgs!]!
+  ): [TestHorseRelationshipRequired]
+  deleteTestHorseRelationshipRequired(
+    where: TestHorseRelationshipRequiredWhereUniqueInput!
+  ): TestHorseRelationshipRequired
+  deleteTestHorseRelationshipRequireds(
+    where: [TestHorseRelationshipRequiredWhereUniqueInput!]!
+  ): [TestHorseRelationshipRequired]
+  createTestRiderRelationshipRequired(
+    data: TestRiderRelationshipRequiredCreateInput!
+  ): TestRiderRelationshipRequired
+  createTestRiderRelationshipRequireds(
+    data: [TestRiderRelationshipRequiredCreateInput!]!
+  ): [TestRiderRelationshipRequired]
+  updateTestRiderRelationshipRequired(
+    where: TestRiderRelationshipRequiredWhereUniqueInput!
+    data: TestRiderRelationshipRequiredUpdateInput!
+  ): TestRiderRelationshipRequired
+  updateTestRiderRelationshipRequireds(
+    data: [TestRiderRelationshipRequiredUpdateArgs!]!
+  ): [TestRiderRelationshipRequired]
+  deleteTestRiderRelationshipRequired(
+    where: TestRiderRelationshipRequiredWhereUniqueInput!
+  ): TestRiderRelationshipRequired
+  deleteTestRiderRelationshipRequireds(
+    where: [TestRiderRelationshipRequiredWhereUniqueInput!]!
+  ): [TestRiderRelationshipRequired]
   createUser(data: UserCreateInput!): User
   createUsers(data: [UserCreateInput!]!): [User]
   updateUser(where: UserWhereUniqueInput!, data: UserUpdateInput!): User
@@ -558,6 +681,30 @@ type Query {
   ): [TestHorseOTM!]
   testHorseOTM(where: TestHorseOTMWhereUniqueInput!): TestHorseOTM
   testHorseOTMSCount(where: TestHorseOTMWhereInput! = {}): Int
+  testHorseRelationshipRequireds(
+    where: TestHorseRelationshipRequiredWhereInput! = {}
+    orderBy: [TestHorseRelationshipRequiredOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [TestHorseRelationshipRequired!]
+  testHorseRelationshipRequired(
+    where: TestHorseRelationshipRequiredWhereUniqueInput!
+  ): TestHorseRelationshipRequired
+  testHorseRelationshipRequiredsCount(
+    where: TestHorseRelationshipRequiredWhereInput! = {}
+  ): Int
+  testRiderRelationshipRequireds(
+    where: TestRiderRelationshipRequiredWhereInput! = {}
+    orderBy: [TestRiderRelationshipRequiredOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [TestRiderRelationshipRequired!]
+  testRiderRelationshipRequired(
+    where: TestRiderRelationshipRequiredWhereUniqueInput!
+  ): TestRiderRelationshipRequired
+  testRiderRelationshipRequiredsCount(
+    where: TestRiderRelationshipRequiredWhereInput! = {}
+  ): Int
   users(
     where: UserWhereInput! = {}
     orderBy: [UserOrderByInput!]! = []

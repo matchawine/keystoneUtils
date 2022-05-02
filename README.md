@@ -1,5 +1,18 @@
 # Keystone Utils
 
+## Relationship required
+
+Relationship field validator, raising a validation error when relationship doesn't have at least one object.
+Like the `isRequired: true` on other fields.
+
+### Usage
+
+- Add `validateInput: relationRequiredValidateInput` in the hooks of the relationship field
+
+### Example
+
+See [testSchema/relationshipRequired/index.ts](https://github.com/matchawine/keystoneUtils/blob/main/testSchema/relationshipRequired/index.ts).
+
 ## Cascade delete
 
 On a 1-to-1 or 1-to-many relationship:
