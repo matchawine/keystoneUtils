@@ -59,6 +59,16 @@ model TestHorseOTM {
   from_TestRiderOTM_horses TestRiderOTM[] @relation("TestRiderOTM_horses")
 }
 
+model TestHorseRelationshipRequired {
+  id   String @id @default(cuid())
+  name String @default("")
+}
+
+model TestRiderRelationshipRequired {
+  id   String @id @default(cuid())
+  name String @default("")
+}
+
 model User {
   id                String    @id @default(cuid())
   name              String    @default("")

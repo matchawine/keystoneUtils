@@ -1,12 +1,10 @@
 import { list } from "@keystone-6/core"
 import { text, password } from "@keystone-6/core/fields"
 import { Lists } from ".keystone/types"
-import { historyLists } from "./testSchema/history"
-import { cascadeDeleteLists } from "./testSchema/cascadeDelete"
+import { testSchemaLists } from "./testSchema"
 
 export const lists: Lists = {
-  ...historyLists,
-  ...cascadeDeleteLists,
+  ...testSchemaLists,
   User: list({
     fields: {
       name: text({ validation: { isRequired: true } }),
