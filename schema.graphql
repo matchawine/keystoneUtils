@@ -475,6 +475,85 @@ input TestHorseRelationshipRequiredRelateToOneForCreateInput {
   connect: TestHorseRelationshipRequiredWhereUniqueInput
 }
 
+type FieldDocument {
+  id: ID!
+  name: String
+  document: FieldDocument_document_Document
+}
+
+type FieldDocument_document_Document {
+  document(hydrateRelationships: Boolean! = false): JSON!
+}
+
+input FieldDocumentWhereUniqueInput {
+  id: ID
+  name: String
+}
+
+input FieldDocumentWhereInput {
+  AND: [FieldDocumentWhereInput!]
+  OR: [FieldDocumentWhereInput!]
+  NOT: [FieldDocumentWhereInput!]
+  id: IDFilter
+  name: StringFilter
+}
+
+input FieldDocumentOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+}
+
+input FieldDocumentUpdateInput {
+  name: String
+  document: JSON
+}
+
+input FieldDocumentUpdateArgs {
+  where: FieldDocumentWhereUniqueInput!
+  data: FieldDocumentUpdateInput!
+}
+
+input FieldDocumentCreateInput {
+  name: String
+  document: JSON
+}
+
+type SchemaWithFieldDocument {
+  id: ID!
+  name: String
+  testFieldDocument: String
+}
+
+input SchemaWithFieldDocumentWhereUniqueInput {
+  id: ID
+}
+
+input SchemaWithFieldDocumentWhereInput {
+  AND: [SchemaWithFieldDocumentWhereInput!]
+  OR: [SchemaWithFieldDocumentWhereInput!]
+  NOT: [SchemaWithFieldDocumentWhereInput!]
+  id: IDFilter
+  name: StringFilter
+}
+
+input SchemaWithFieldDocumentOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+}
+
+input SchemaWithFieldDocumentUpdateInput {
+  name: String
+}
+
+input SchemaWithFieldDocumentUpdateArgs {
+  where: SchemaWithFieldDocumentWhereUniqueInput!
+  data: SchemaWithFieldDocumentUpdateInput!
+}
+
+input SchemaWithFieldDocumentCreateInput {
+  name: String
+}
+
 type User {
   id: ID!
   name: String
@@ -624,6 +703,36 @@ type Mutation {
   deleteTestRiderRelationshipRequireds(
     where: [TestRiderRelationshipRequiredWhereUniqueInput!]!
   ): [TestRiderRelationshipRequired]
+  createFieldDocument(data: FieldDocumentCreateInput!): FieldDocument
+  createFieldDocuments(data: [FieldDocumentCreateInput!]!): [FieldDocument]
+  updateFieldDocument(
+    where: FieldDocumentWhereUniqueInput!
+    data: FieldDocumentUpdateInput!
+  ): FieldDocument
+  updateFieldDocuments(data: [FieldDocumentUpdateArgs!]!): [FieldDocument]
+  deleteFieldDocument(where: FieldDocumentWhereUniqueInput!): FieldDocument
+  deleteFieldDocuments(
+    where: [FieldDocumentWhereUniqueInput!]!
+  ): [FieldDocument]
+  createSchemaWithFieldDocument(
+    data: SchemaWithFieldDocumentCreateInput!
+  ): SchemaWithFieldDocument
+  createSchemaWithFieldDocuments(
+    data: [SchemaWithFieldDocumentCreateInput!]!
+  ): [SchemaWithFieldDocument]
+  updateSchemaWithFieldDocument(
+    where: SchemaWithFieldDocumentWhereUniqueInput!
+    data: SchemaWithFieldDocumentUpdateInput!
+  ): SchemaWithFieldDocument
+  updateSchemaWithFieldDocuments(
+    data: [SchemaWithFieldDocumentUpdateArgs!]!
+  ): [SchemaWithFieldDocument]
+  deleteSchemaWithFieldDocument(
+    where: SchemaWithFieldDocumentWhereUniqueInput!
+  ): SchemaWithFieldDocument
+  deleteSchemaWithFieldDocuments(
+    where: [SchemaWithFieldDocumentWhereUniqueInput!]!
+  ): [SchemaWithFieldDocument]
   createUser(data: UserCreateInput!): User
   createUsers(data: [UserCreateInput!]!): [User]
   updateUser(where: UserWhereUniqueInput!, data: UserUpdateInput!): User
@@ -704,6 +813,26 @@ type Query {
   ): TestRiderRelationshipRequired
   testRiderRelationshipRequiredsCount(
     where: TestRiderRelationshipRequiredWhereInput! = {}
+  ): Int
+  fieldDocuments(
+    where: FieldDocumentWhereInput! = {}
+    orderBy: [FieldDocumentOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [FieldDocument!]
+  fieldDocument(where: FieldDocumentWhereUniqueInput!): FieldDocument
+  fieldDocumentsCount(where: FieldDocumentWhereInput! = {}): Int
+  schemaWithFieldDocuments(
+    where: SchemaWithFieldDocumentWhereInput! = {}
+    orderBy: [SchemaWithFieldDocumentOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [SchemaWithFieldDocument!]
+  schemaWithFieldDocument(
+    where: SchemaWithFieldDocumentWhereUniqueInput!
+  ): SchemaWithFieldDocument
+  schemaWithFieldDocumentsCount(
+    where: SchemaWithFieldDocumentWhereInput! = {}
   ): Int
   users(
     where: UserWhereInput! = {}

@@ -74,6 +74,17 @@ model TestRiderRelationshipRequired {
   @@index([horseId])
 }
 
+model FieldDocument {
+  id       String @id @default(cuid())
+  name     String @unique @default("")
+  document String @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+}
+
+model SchemaWithFieldDocument {
+  id   String @id @default(cuid())
+  name String @default("")
+}
+
 model User {
   id                String    @id @default(cuid())
   name              String    @default("")
