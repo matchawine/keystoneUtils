@@ -428,6 +428,7 @@ input TestHorseRelationshipRequiredCreateInput {
 type TestRiderRelationshipRequired {
   id: ID!
   name: String
+  horse: TestHorseRelationshipRequired
 }
 
 input TestRiderRelationshipRequiredWhereUniqueInput {
@@ -440,6 +441,7 @@ input TestRiderRelationshipRequiredWhereInput {
   NOT: [TestRiderRelationshipRequiredWhereInput!]
   id: IDFilter
   name: StringFilter
+  horse: TestHorseRelationshipRequiredWhereInput
 }
 
 input TestRiderRelationshipRequiredOrderByInput {
@@ -449,6 +451,13 @@ input TestRiderRelationshipRequiredOrderByInput {
 
 input TestRiderRelationshipRequiredUpdateInput {
   name: String
+  horse: TestHorseRelationshipRequiredRelateToOneForUpdateInput
+}
+
+input TestHorseRelationshipRequiredRelateToOneForUpdateInput {
+  create: TestHorseRelationshipRequiredCreateInput
+  connect: TestHorseRelationshipRequiredWhereUniqueInput
+  disconnect: Boolean
 }
 
 input TestRiderRelationshipRequiredUpdateArgs {
@@ -458,6 +467,12 @@ input TestRiderRelationshipRequiredUpdateArgs {
 
 input TestRiderRelationshipRequiredCreateInput {
   name: String
+  horse: TestHorseRelationshipRequiredRelateToOneForCreateInput
+}
+
+input TestHorseRelationshipRequiredRelateToOneForCreateInput {
+  create: TestHorseRelationshipRequiredCreateInput
+  connect: TestHorseRelationshipRequiredWhereUniqueInput
 }
 
 type User {

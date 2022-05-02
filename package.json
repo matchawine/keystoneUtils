@@ -15,7 +15,8 @@
     "ks:postinstall": "keystone postinstall",
     "cleanDist": "rm -rf dist",
     "build": "yarn run cleanDist && tsc -p tsconfigBuild.json",
-    "test": "jest --runInBand --testTimeout=60000"
+    "test": "jest --runInBand --testTimeout=60000",
+    "testTypeScript": "yarn tsc"
   },
   "license": "MIT",
   "bugs": {

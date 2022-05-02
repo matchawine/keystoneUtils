@@ -60,13 +60,18 @@ model TestHorseOTM {
 }
 
 model TestHorseRelationshipRequired {
-  id   String @id @default(cuid())
-  name String @default("")
+  id                                       String                          @id @default(cuid())
+  name                                     String                          @default("")
+  from_TestRiderRelationshipRequired_horse TestRiderRelationshipRequired[] @relation("TestRiderRelationshipRequired_horse")
 }
 
 model TestRiderRelationshipRequired {
-  id   String @id @default(cuid())
-  name String @default("")
+  id      String                         @id @default(cuid())
+  name    String                         @default("")
+  horse   TestHorseRelationshipRequired? @relation("TestRiderRelationshipRequired_horse", fields: [horseId], references: [id])
+  horseId String?                        @map("horse")
+
+  @@index([horseId])
 }
 
 model User {
