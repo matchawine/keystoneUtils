@@ -22,6 +22,12 @@ jobs:
 
       - run: yarn install --frozen-lockfile --ignore-scripts
 
+      - name: Delete old artifacts
+        uses: kolpav/purge-artifacts-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          expire-in: 3months
+
       - name: Check ESLint
         # https://github.com/bradennapier/eslint-plus-action/issues/72
         uses: Maggi64/eslint-plus-action@master
