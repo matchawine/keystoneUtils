@@ -14,7 +14,10 @@ describe("Relation Required", () => {
         }`,
     })
 
-    expect(data?.createTestRiderRelationshipRequired).toBe(null)
+    expect(
+      (data as { createTestRiderRelationshipRequired: any })
+        ?.createTestRiderRelationshipRequired,
+    ).toBe(null)
     expect(errors && errors[0].message).toMatch("horse field is required")
   })
 })
