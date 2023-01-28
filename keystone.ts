@@ -1,10 +1,14 @@
 import { config } from "@keystone-6/core"
 
-import { lists } from "./schema"
+// eslint-disable-next-line immutable/no-mutation
+process.env.IS_LIBRARY_DEV = "true"
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { lists } = require("./schema")
 
 const url = process.env.DATABASE_URL || "file:./keystone.db"
 const port = parseInt(process.env.PORT || "") || 3002
-console.log("url", url)
+
 export default config({
   db: {
     provider: "sqlite",

@@ -49,4 +49,3 @@ export const beforeOperationDeleteMany =
       await context.query[ref].deleteMany({ where })
     }
   }
-export const vachier = true
