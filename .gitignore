@@ -8,5 +8,5 @@ node_modules
 /.env
 config.js
 
-keystone.db
-test.db
+*.db
+*.db-journal

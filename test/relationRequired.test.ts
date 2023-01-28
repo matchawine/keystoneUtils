@@ -1,21 +1,20 @@
-import { setupTestRunner } from "@keystone-6/core/testing"
-import config from "./../keystone"
+import { getTestContext, resetTestDatabase } from "./utils"
 
-const runner = setupTestRunner({ config })
+const context = getTestContext()
+
+beforeEach(resetTestDatabase)
+
 describe("Relation Required", () => {
-  it(
-    "Required",
-    runner(async ({ context }) => {
-      const { data, errors } = await context.graphql.raw({
-        query: `mutation {
+  it("Required", async () => {
+    const { data, errors } = await context.graphql.raw({
+      query: `mutation {
             createTestRiderRelationshipRequired(data: { name: "Doe" }) {
               id name horse { id }
           }
         }`,
-      })
+    })
 
-      expect(data?.createTestRiderRelationshipRequired).toBe(null)
-      expect(errors && errors[0].message).toMatch("horse field is required")
-    }),
-  )
+    expect(data?.createTestRiderRelationshipRequired).toBe(null)
+    expect(errors && errors[0].message).toMatch("horse field is required")
+  })
 })

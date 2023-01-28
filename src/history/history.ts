@@ -1,3 +1,4 @@
+/* eslint-disable */
 // @ts-nocheck
 import { graphql, list } from "@keystone-6/core"
 import {
@@ -9,6 +10,7 @@ import {
   virtual,
 } from "@keystone-6/core/fields"
 import { KeystoneContext } from "@keystone-6/core/types"
+import { allowAll } from "@keystone-6/core/access"
 
 /*
 TODO:
@@ -41,6 +43,7 @@ query ($key: String!) {
 
 const getNameDate = date => date.toISOString().slice(0, 16).replace("T", " ")
 export const History = list({
+  access: allowAll,
   fields: {
     name: virtual({
       field: graphql.field({
@@ -104,7 +107,7 @@ export const History = list({
       }),
       ui: {
         query: "{ type plural entityId }",
-        views: require.resolve("./item"),
+        views: "./src/history/item",
       },
     }),
   },
