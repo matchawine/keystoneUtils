@@ -107,7 +107,11 @@ export const History = list({
       }),
       ui: {
         query: "{ type plural entityId }",
-        views: "./src/history/item",
+        // TODO: kludge, try using clean package exports instead, like:
+        // https://github.com/keystonejs/keystone/blob/main/packages/cloudinary/views/package.json
+        views: process.env.IS_LIBRARY_DEV
+          ? "./src/history/item"
+          : "matcha-keystone-utils/dist/history/item",
       },
     }),
   },
