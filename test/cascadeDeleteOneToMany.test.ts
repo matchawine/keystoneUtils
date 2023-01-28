@@ -24,9 +24,9 @@ describe("One to Many", () => {
           id: expect.any(String),
         },
         `
-        Object {
-          "horses": Array [
-            Object {
+        {
+          "horses": [
+            {
               "name": "Jumpy",
             },
           ],

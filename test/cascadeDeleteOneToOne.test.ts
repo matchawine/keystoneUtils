@@ -23,13 +23,13 @@ describe("One to One", () => {
           id: expect.any(String),
         },
         `
-      Object {
-        "id": Any<String>,
-        "rider": Object {
-          "name": "Roger",
-        },
-      }
-    `,
+        {
+          "id": Any<String>,
+          "rider": {
+            "name": "Roger",
+          },
+        }
+      `,
       )
 
       await context.query.TestHorseOTO.deleteOne({
