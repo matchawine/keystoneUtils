@@ -1,14 +1,17 @@
 import { list } from "@keystone-6/core"
 import { relationship, text } from "@keystone-6/core/fields"
 import { beforeOperationDeleteMany } from "../../src/cascadeDelete"
+import { allowAll } from "@keystone-6/core/access"
 
 const TestHorseOTM = list({
+  access: allowAll,
   fields: {
     name: text(),
   },
 })
 
 const TestRiderOTM = list({
+  access: allowAll,
   fields: {
     name: text(),
     horses: relationship({
