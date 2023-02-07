@@ -4,8 +4,7 @@ import { resetDatabase } from "@keystone-6/core/testing"
 import { getContext } from "@keystone-6/core/context"
 import baseConfig from "../keystone"
 
-export const getDbUrl = () =>
-  `file:./test-${process.env.JEST_WORKER_ID || ""}.db`
+const getDbUrl = () => `file:./test-${process.env.JEST_WORKER_ID || ""}.db`
 export const getTestContext = () => {
   const config = { ...baseConfig, db: { ...baseConfig.db, url: getDbUrl() } }
   return getContext(config, PrismaModule)
