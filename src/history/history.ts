@@ -159,11 +159,11 @@ export const afterOperationSaveHistory = async ({
   // console.log("context.session", context.session)
 
   const entityId = item?.id || originalItem?.id || ""
-  const userData = context.session?.data
+  const userId = context.session?.data?.id
 
   const history = {
     date: new Date(),
-    user: userData ? { connect: { id: userData.id } } : null,
+    user: userData ? { connect: { id: userId } } : null,
     entity: listKey,
     entityId,
     operation,
