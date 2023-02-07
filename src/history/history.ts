@@ -163,7 +163,7 @@ export const afterOperationSaveHistory = async ({
 
   const history = {
     date: new Date(),
-    user: userData ? { connect: userData } : null,
+    user: userData ? { connect: { id: userData.id } } : null,
     entity: listKey,
     entityId,
     operation,
