@@ -46,6 +46,7 @@ query ($key: String!) {
 `
 
 const getNameDate = date => date.toISOString().slice(0, 16).replace("T", " ")
+
 export const getHistoryEntity = (
   listConfig: Omit<ListConfig<BaseListTypeInfo, any>, "fields">,
 ) =>

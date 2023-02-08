@@ -34,7 +34,7 @@ See [testSchema/cascadeDelete/oneToOne.ts](https://github.com/matchawine/keyston
 
 ### Usage
 
-- Add History schema to your lists
+- Add the History schema to your lists using `getHistoryEntity()`
 - Add the `afterOperationSaveHistory` hook to any object you want to historize
 
 ### Example
