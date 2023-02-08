@@ -1,6 +1,6 @@
 /* eslint-disable */
 // @ts-nocheck
-import { graphql, list } from "@keystone-6/core"
+import { graphql, list, ListConfig } from "@keystone-6/core"
 import {
   json,
   relationship,
@@ -9,17 +9,21 @@ import {
   timestamp,
   virtual,
 } from "@keystone-6/core/fields"
-import { KeystoneContext } from "@keystone-6/core/types"
+import { BaseListTypeInfo, KeystoneContext } from "@keystone-6/core/types"
 import { allowAll } from "@keystone-6/core/access"
+import { ListAccessControl } from "@keystone-6/core/dist/declarations/src/types/config/access-control"
 
 /*
 TODO:
 - Code cleanup
+- Add session user
+- Add session user access to history (remove allowAll)
 - Check what happens if user is deleted
 - Check what happens when no user
 - Interface cleanup
 - Move to utils project
 - Try "restore before" and "restore after"
+- Ignore password
  */
 
 const operations = [
@@ -42,94 +46,98 @@ query ($key: String!) {
 `
 
 const getNameDate = date => date.toISOString().slice(0, 16).replace("T", " ")
-export const History = list({
-  access: allowAll,
-  fields: {
-    name: virtual({
-      field: graphql.field({
-        type: graphql.String,
-        resolve: ({ entity, date, operation }) =>
-          `[${operation} in ${entity}] ${getNameDate(date)}`,
-      }),
-      ui: {
-        listView: { fieldMode: "hidden" },
-      },
-    }),
-    date: timestamp(),
-    user: relationship({ ref: "User" }),
-    entity: text(),
-    entityId: text(),
-    operation: select({ options: operations }),
-    before: json({ label: "Before [originalItem]" }),
-    after: json({ label: "After [item]" }),
-    inputData: json({ label: "Modified [inputData]" }),
-    resolvedData: json({ label: "Resolved [resolvedData]" }),
-    item: virtual({
-      field: graphql.field({
-        type: graphql.object<{
-          words: number
-          sentences: number
-          paragraphs: number
-        }>()({
-          name: "ItemData",
-          fields: {
-            type: graphql.field({ type: graphql.String }),
-            plural: graphql.field({ type: graphql.String }),
-            entityId: graphql.field({ type: graphql.String }),
-          },
+
+export const getHistoryEntity = (
+  listConfig: Omit<ListConfig<BaseListTypeInfo, any>, "fields">,
+) =>
+  list({
+    ...listConfig,
+    fields: {
+      name: virtual({
+        field: graphql.field({
+          type: graphql.String,
+          resolve: ({ entity, date, operation }) =>
+            `[${operation} in ${entity}] ${getNameDate(date)}`,
         }),
-        resolve: async (item, args, context) => {
-          const { entityId, entity } = item
-          // console.log(context.)
-          const keystoneMetaResponse = await context.graphql.run({
-            query: pluralNameQuery,
-            variables: { key: entity },
-          })
-          const listMeta = keystoneMetaResponse.keystone.adminMeta.list
-          const plural = listMeta?.plural
-          const itemz =
-            listMeta &&
-            (await context.query[entity].findOne({
-              where: { id: entityId },
-            }))
-
-          const type =
-            item.operation === "delete"
-              ? "itemDeletedNow"
-              : listMeta
-              ? itemz
-                ? "itemExists"
-                : "itemDeletedLater"
-              : "entityDeleted"
-
-          return { type, plural, entityId }
+        ui: {
+          listView: { fieldMode: "hidden" },
         },
       }),
-      ui: {
-        query: "{ type plural entityId }",
-        // TODO: kludge, try using clean package exports instead, like:
-        // https://github.com/keystonejs/keystone/blob/main/packages/cloudinary/views/package.json
-        views: process.env.IS_LIBRARY_DEV
-          ? "./src/history/item"
-          : "matcha-keystone-utils/dist/history/item",
+      date: timestamp(),
+      user: relationship({ ref: "User" }),
+      entity: text(),
+      entityId: text(),
+      operation: select({ options: operations }),
+      before: json({ label: "Before [originalItem]" }),
+      after: json({ label: "After [item]" }),
+      inputData: json({ label: "Modified [inputData]" }),
+      resolvedData: json({ label: "Resolved [resolvedData]" }),
+      item: virtual({
+        field: graphql.field({
+          type: graphql.object<{
+            words: number
+            sentences: number
+            paragraphs: number
+          }>()({
+            name: "ItemData",
+            fields: {
+              type: graphql.field({ type: graphql.String }),
+              plural: graphql.field({ type: graphql.String }),
+              entityId: graphql.field({ type: graphql.String }),
+            },
+          }),
+          resolve: async (item, args, context) => {
+            const { entityId, entity } = item
+            // console.log(context.)
+            const keystoneMetaResponse = await context.graphql.run({
+              query: pluralNameQuery,
+              variables: { key: entity },
+            })
+            const listMeta = keystoneMetaResponse.keystone.adminMeta.list
+            const plural = listMeta?.plural
+            const itemz =
+              listMeta &&
+              (await context.query[entity].findOne({
+                where: { id: entityId },
+              }))
+
+            const type =
+              item.operation === "delete"
+                ? "itemDeletedNow"
+                : listMeta
+                ? itemz
+                  ? "itemExists"
+                  : "itemDeletedLater"
+                : "entityDeleted"
+
+            return { type, plural, entityId }
+          },
+        }),
+        ui: {
+          query: "{ type plural entityId }",
+          // TODO: kludge, try using clean package exports instead, like:
+          // https://github.com/keystonejs/keystone/blob/main/packages/cloudinary/views/package.json
+          views: process.env.IS_LIBRARY_DEV
+            ? "./src/history/item"
+            : "matcha-keystone-utils/dist/history/item",
+        },
+      }),
+    },
+    ui: {
+      listView: {
+        initialColumns: ["user", "item", "operation", "date"],
+        initialSort: { field: "date", direction: "DESC" },
       },
-    }),
-  },
-  ui: {
-    listView: {
-      initialColumns: ["user", "item", "operation", "date"],
-      initialSort: { field: "date", direction: "DESC" },
+      hideCreate: true,
+      hideDelete: true,
     },
-    hideCreate: true,
-    hideDelete: true,
-  },
-  hooks: {
-    validateInput: ({ operation, addValidationError }) => {
-      if (operation === "update")
-        addValidationError("You cannot rewrite History, you fascist!")
+    hooks: {
+      validateInput: ({ operation, addValidationError }) => {
+        if (operation === "update")
+          addValidationError("You cannot rewrite History, you fascist!")
+      },
     },
-  },
-})
+  })
 
 type AfterOperationInput = {
   listKey: string
