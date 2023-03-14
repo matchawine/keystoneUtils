@@ -15,6 +15,7 @@ import { ListAccessControl } from "@keystone-6/core/dist/declarations/src/types/
 
 /*
 TODO:
+- Bug "go to item" for boost campaign
 - Code cleanup
 - Add session user
 - Add session user access to history (remove allowAll)
@@ -180,5 +181,5 @@ export const afterOperationSaveHistory = async ({
     inputData,
     resolvedData,
   }
-  await context.db.History.createOne({ data: history })
+  await context.sudo().db.History.createOne({ data: history })
 }
