@@ -19,6 +19,6 @@ export const url = (
     },
     validation: {
       ...urlFieldConfig?.validation,
-      match: { ...urlFieldConfig?.validation?.match, regex: urlRegex },
+      match: { regex: urlRegex, ...urlFieldConfig?.validation?.match },
     },
   })
