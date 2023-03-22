@@ -12,6 +12,11 @@ generator client {
   output   = "node_modules/.prisma/client"
 }
 
+model Url {
+  id          String @id @default(cuid())
+  linkToBinou String @default("")
+}
+
 model History {
   id           String    @id @default(cuid())
   date         DateTime?
