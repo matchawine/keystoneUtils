@@ -6,9 +6,9 @@ import { text } from "@keystone-6/core/fields"
 const urlRegex =
   /^$|^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/
 
-export const url = (
-  urlFieldConfig?: TextFieldConfig<BaseListTypeInfo> | undefined,
-): FieldTypeFunc<BaseListTypeInfo> =>
+export const url = <ListTypeInfo extends BaseListTypeInfo>(
+  urlFieldConfig?: TextFieldConfig<ListTypeInfo> | undefined,
+): FieldTypeFunc<ListTypeInfo> =>
   text({
     ...urlFieldConfig,
     ui: {

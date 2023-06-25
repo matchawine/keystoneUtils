@@ -141,21 +141,7 @@ input StringNullableFilter {
   contains: String
   startsWith: String
   endsWith: String
-  not: NestedStringNullableFilter
-}
-
-input NestedStringNullableFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  not: NestedStringNullableFilter
+  not: StringNullableFilter
 }
 
 input HistoryOrderByInput {
@@ -329,7 +315,7 @@ input TestRiderOTORelateToOneForCreateInput {
 type TestRiderOTM {
   id: ID!
   name: String
-  horses(where: TestHorseOTMWhereInput! = {}, orderBy: [TestHorseOTMOrderByInput!]! = [], take: Int, skip: Int! = 0): [TestHorseOTM!]
+  horses(where: TestHorseOTMWhereInput! = {}, orderBy: [TestHorseOTMOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TestHorseOTMWhereUniqueInput): [TestHorseOTM!]
   horsesCount(where: TestHorseOTMWhereInput! = {}): Int
 }
 
@@ -621,34 +607,34 @@ type Mutation {
 }
 
 type Query {
-  urls(where: UrlWhereInput! = {}, orderBy: [UrlOrderByInput!]! = [], take: Int, skip: Int! = 0): [Url!]
+  urls(where: UrlWhereInput! = {}, orderBy: [UrlOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: UrlWhereUniqueInput): [Url!]
   url(where: UrlWhereUniqueInput!): Url
   urlsCount(where: UrlWhereInput! = {}): Int
-  histories(where: HistoryWhereInput! = {}, orderBy: [HistoryOrderByInput!]! = [], take: Int, skip: Int! = 0): [History!]
+  histories(where: HistoryWhereInput! = {}, orderBy: [HistoryOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: HistoryWhereUniqueInput): [History!]
   history(where: HistoryWhereUniqueInput!): History
   historiesCount(where: HistoryWhereInput! = {}): Int
-  historizeds(where: HistorizedWhereInput! = {}, orderBy: [HistorizedOrderByInput!]! = [], take: Int, skip: Int! = 0): [Historized!]
+  historizeds(where: HistorizedWhereInput! = {}, orderBy: [HistorizedOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: HistorizedWhereUniqueInput): [Historized!]
   historized(where: HistorizedWhereUniqueInput!): Historized
   historizedsCount(where: HistorizedWhereInput! = {}): Int
-  testRiderOTOS(where: TestRiderOTOWhereInput! = {}, orderBy: [TestRiderOTOOrderByInput!]! = [], take: Int, skip: Int! = 0): [TestRiderOTO!]
+  testRiderOTOS(where: TestRiderOTOWhereInput! = {}, orderBy: [TestRiderOTOOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TestRiderOTOWhereUniqueInput): [TestRiderOTO!]
   testRiderOTO(where: TestRiderOTOWhereUniqueInput!): TestRiderOTO
   testRiderOTOSCount(where: TestRiderOTOWhereInput! = {}): Int
-  testHorseOTOS(where: TestHorseOTOWhereInput! = {}, orderBy: [TestHorseOTOOrderByInput!]! = [], take: Int, skip: Int! = 0): [TestHorseOTO!]
+  testHorseOTOS(where: TestHorseOTOWhereInput! = {}, orderBy: [TestHorseOTOOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TestHorseOTOWhereUniqueInput): [TestHorseOTO!]
   testHorseOTO(where: TestHorseOTOWhereUniqueInput!): TestHorseOTO
   testHorseOTOSCount(where: TestHorseOTOWhereInput! = {}): Int
-  testRiderOTMS(where: TestRiderOTMWhereInput! = {}, orderBy: [TestRiderOTMOrderByInput!]! = [], take: Int, skip: Int! = 0): [TestRiderOTM!]
+  testRiderOTMS(where: TestRiderOTMWhereInput! = {}, orderBy: [TestRiderOTMOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TestRiderOTMWhereUniqueInput): [TestRiderOTM!]
   testRiderOTM(where: TestRiderOTMWhereUniqueInput!): TestRiderOTM
   testRiderOTMSCount(where: TestRiderOTMWhereInput! = {}): Int
-  testHorseOTMS(where: TestHorseOTMWhereInput! = {}, orderBy: [TestHorseOTMOrderByInput!]! = [], take: Int, skip: Int! = 0): [TestHorseOTM!]
+  testHorseOTMS(where: TestHorseOTMWhereInput! = {}, orderBy: [TestHorseOTMOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TestHorseOTMWhereUniqueInput): [TestHorseOTM!]
   testHorseOTM(where: TestHorseOTMWhereUniqueInput!): TestHorseOTM
   testHorseOTMSCount(where: TestHorseOTMWhereInput! = {}): Int
-  testHorseRelationshipRequireds(where: TestHorseRelationshipRequiredWhereInput! = {}, orderBy: [TestHorseRelationshipRequiredOrderByInput!]! = [], take: Int, skip: Int! = 0): [TestHorseRelationshipRequired!]
+  testHorseRelationshipRequireds(where: TestHorseRelationshipRequiredWhereInput! = {}, orderBy: [TestHorseRelationshipRequiredOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TestHorseRelationshipRequiredWhereUniqueInput): [TestHorseRelationshipRequired!]
   testHorseRelationshipRequired(where: TestHorseRelationshipRequiredWhereUniqueInput!): TestHorseRelationshipRequired
   testHorseRelationshipRequiredsCount(where: TestHorseRelationshipRequiredWhereInput! = {}): Int
-  testRiderRelationshipRequireds(where: TestRiderRelationshipRequiredWhereInput! = {}, orderBy: [TestRiderRelationshipRequiredOrderByInput!]! = [], take: Int, skip: Int! = 0): [TestRiderRelationshipRequired!]
+  testRiderRelationshipRequireds(where: TestRiderRelationshipRequiredWhereInput! = {}, orderBy: [TestRiderRelationshipRequiredOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TestRiderRelationshipRequiredWhereUniqueInput): [TestRiderRelationshipRequired!]
   testRiderRelationshipRequired(where: TestRiderRelationshipRequiredWhereUniqueInput!): TestRiderRelationshipRequired
   testRiderRelationshipRequiredsCount(where: TestRiderRelationshipRequiredWhereInput! = {}): Int
-  users(where: UserWhereInput! = {}, orderBy: [UserOrderByInput!]! = [], take: Int, skip: Int! = 0): [User!]
+  users(where: UserWhereInput! = {}, orderBy: [UserOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: UserWhereUniqueInput): [User!]
   user(where: UserWhereUniqueInput!): User
   usersCount(where: UserWhereInput! = {}): Int
   keystone: KeystoneMeta!
@@ -690,6 +676,7 @@ type KeystoneAdminUIFieldMeta {
   description: String
   isOrderable: Boolean!
   isFilterable: Boolean!
+  isNonNull: [KeystoneAdminUIFieldMetaIsNonNull!]
   fieldMeta: JSON
   viewsIndex: Int!
   customViewsIndex: Int
@@ -697,6 +684,12 @@ type KeystoneAdminUIFieldMeta {
   listView: KeystoneAdminUIFieldMetaListView!
   itemView(id: ID): KeystoneAdminUIFieldMetaItemView
   search: QueryMode
+}
+
+enum KeystoneAdminUIFieldMetaIsNonNull {
+  read
+  create
+  update
 }
 
 type KeystoneAdminUIFieldMetaCreateView {

@@ -1,14 +1,15 @@
 import { ListHooks } from "@keystone-6/core/types"
 import { BaseListTypeInfo } from "@keystone-6/core/types"
 
-type BeforeOperationType = Exclude<
-  ListHooks<BaseListTypeInfo>["beforeOperation"],
+type BeforeOperationType<ListTypeInfo extends BaseListTypeInfo> = Exclude<
+  ListHooks<ListTypeInfo>["beforeOperation"],
   undefined
 >
 
-type BeforeOperationParameter = Parameters<BeforeOperationType>[0] & {
-  fieldKey: string
-}
+type BeforeOperationParameter<ListTypeInfo extends BaseListTypeInfo> =
+  Parameters<BeforeOperationType<ListTypeInfo>>[0] & {
+    fieldKey: string
+  }
 
 type HookConfig = {
   ref: string
@@ -18,8 +19,13 @@ type Id = NonNullable<any>
 type IdObject = { id: Id }
 
 export const beforeOperationDeleteOne =
-  ({ ref }: HookConfig) =>
-  async ({ item, context, fieldKey, operation }: BeforeOperationParameter) => {
+  <ListTypeInfo extends BaseListTypeInfo>({ ref }: HookConfig) =>
+  async ({
+    item,
+    context,
+    fieldKey,
+    operation,
+  }: BeforeOperationParameter<ListTypeInfo>) => {
     if (operation === "delete") {
       const idPath = fieldKey + "Id"
       const id = (item as { [idPath: string]: Id })[idPath]
@@ -28,14 +34,14 @@ export const beforeOperationDeleteOne =
   }
 
 export const beforeOperationDeleteMany =
-  ({ ref }: HookConfig) =>
+  <ListTypeInfo extends BaseListTypeInfo>({ ref }: HookConfig) =>
   async ({
     item,
     context,
     fieldKey,
     listKey,
     operation,
-  }: BeforeOperationParameter) => {
+  }: BeforeOperationParameter<ListTypeInfo>) => {
     if (operation === "delete") {
       const { id } = item as IdObject
       const parentWithChildren = await context.query[listKey].findOne({

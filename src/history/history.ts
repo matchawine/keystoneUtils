@@ -48,8 +48,8 @@ query ($key: String!) {
 
 const getNameDate = date => date.toISOString().slice(0, 16).replace("T", " ")
 
-export const getHistoryEntity = (
-  listConfig: Omit<ListConfig<BaseListTypeInfo, any>, "fields">,
+export const getHistoryEntity = <ListTypeInfo extends BaseListTypeInfo>(
+  listConfig: Omit<ListConfig<ListTypeInfo, any>, "fields">,
 ) =>
   list({
     ...listConfig,
@@ -140,14 +140,14 @@ export const getHistoryEntity = (
     },
   })
 
-type AfterOperationInput = {
+type AfterOperationInput<TypeInfo> = {
   listKey: string
   operation: string
   inputData: any
   originalItem: any
   item: any
   resolvedData: any
-  context: KeystoneContext
+  context: KeystoneContext<TypeInfo>
 }
 
 export const afterOperationSaveHistory = async ({
