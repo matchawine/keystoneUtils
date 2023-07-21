@@ -14,9 +14,11 @@ export const url = <ListTypeInfo extends BaseListTypeInfo>(
     ui: {
       ...urlFieldConfig?.ui,
       displayMode: "input",
-      views: process.env.IS_LIBRARY_DEV
-        ? "./src/url/view"
-        : "matcha-keystone-utils/dist/url/view",
+      views:
+        urlFieldConfig?.ui?.views ||
+        (process.env.IS_LIBRARY_DEV
+          ? "./src/url/view"
+          : "matcha-keystone-utils/dist/url/view"),
     },
     validation: {
       ...urlFieldConfig?.validation,

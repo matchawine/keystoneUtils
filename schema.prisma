@@ -16,6 +16,11 @@ model Url {
   linkToBinou String @default("")
 }
 
+model ImageUrl {
+  id               String @id @default(cuid())
+  linkToBinouImage String @default("")
+}
+
 model History {
   id           String    @id @default(cuid())
   date         DateTime?
