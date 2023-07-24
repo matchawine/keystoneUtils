@@ -80,6 +80,41 @@ input UrlCreateInput {
   linkToBinou: String
 }
 
+type ImageUrl {
+  id: ID!
+  linkToImage: String
+}
+
+input ImageUrlWhereUniqueInput {
+  id: ID
+}
+
+input ImageUrlWhereInput {
+  AND: [ImageUrlWhereInput!]
+  OR: [ImageUrlWhereInput!]
+  NOT: [ImageUrlWhereInput!]
+  id: IDFilter
+  linkToImage: StringFilter
+}
+
+input ImageUrlOrderByInput {
+  id: OrderDirection
+  linkToImage: OrderDirection
+}
+
+input ImageUrlUpdateInput {
+  linkToImage: String
+}
+
+input ImageUrlUpdateArgs {
+  where: ImageUrlWhereUniqueInput!
+  data: ImageUrlUpdateInput!
+}
+
+input ImageUrlCreateInput {
+  linkToImage: String
+}
+
 type History {
   id: ID!
   name: String
@@ -550,6 +585,12 @@ type Mutation {
   updateUrls(data: [UrlUpdateArgs!]!): [Url]
   deleteUrl(where: UrlWhereUniqueInput!): Url
   deleteUrls(where: [UrlWhereUniqueInput!]!): [Url]
+  createImageUrl(data: ImageUrlCreateInput!): ImageUrl
+  createImageUrls(data: [ImageUrlCreateInput!]!): [ImageUrl]
+  updateImageUrl(where: ImageUrlWhereUniqueInput!, data: ImageUrlUpdateInput!): ImageUrl
+  updateImageUrls(data: [ImageUrlUpdateArgs!]!): [ImageUrl]
+  deleteImageUrl(where: ImageUrlWhereUniqueInput!): ImageUrl
+  deleteImageUrls(where: [ImageUrlWhereUniqueInput!]!): [ImageUrl]
   createHistory(data: HistoryCreateInput!): History
   createHistories(data: [HistoryCreateInput!]!): [History]
   updateHistory(where: HistoryWhereUniqueInput!, data: HistoryUpdateInput!): History
@@ -610,6 +651,9 @@ type Query {
   urls(where: UrlWhereInput! = {}, orderBy: [UrlOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: UrlWhereUniqueInput): [Url!]
   url(where: UrlWhereUniqueInput!): Url
   urlsCount(where: UrlWhereInput! = {}): Int
+  imageUrls(where: ImageUrlWhereInput! = {}, orderBy: [ImageUrlOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ImageUrlWhereUniqueInput): [ImageUrl!]
+  imageUrl(where: ImageUrlWhereUniqueInput!): ImageUrl
+  imageUrlsCount(where: ImageUrlWhereInput! = {}): Int
   histories(where: HistoryWhereInput! = {}, orderBy: [HistoryOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: HistoryWhereUniqueInput): [History!]
   history(where: HistoryWhereUniqueInput!): History
   historiesCount(where: HistoryWhereInput! = {}): Int
