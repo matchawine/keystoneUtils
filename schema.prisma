@@ -17,8 +17,8 @@ model Url {
 }
 
 model ImageUrl {
-  id               String @id @default(cuid())
-  linkToBinouImage String @default("")
+  id          String @id @default(cuid())
+  linkToImage String @default("")
 }
 
 model History {

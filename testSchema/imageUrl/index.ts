@@ -6,7 +6,7 @@ import { imageUrl } from "../../src/url/imageUrl"
 export const ImageUrl: Lists.ImageUrl = list({
   access: allowAll,
   fields: {
-    linkToBinouImage: imageUrl({
+    linkToImage: imageUrl({
       ui: { itemView: { fieldPosition: "sidebar" } },
     }),
   },

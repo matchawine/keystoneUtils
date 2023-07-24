@@ -82,13 +82,14 @@ export const Field = ({
       {value && (
         <div
           style={{
-            padding: 20,
+            paddingTop: 20,
+            paddingBottom: 20,
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
           }}
         >
-          <img src={value} />
+          <img src={value} alt="Image not found." />
         </div>
       )}
     </FieldContainer>

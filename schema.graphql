@@ -82,7 +82,7 @@ input UrlCreateInput {
 
 type ImageUrl {
   id: ID!
-  linkToBinouImage: String
+  linkToImage: String
 }
 
 input ImageUrlWhereUniqueInput {
@@ -94,16 +94,16 @@ input ImageUrlWhereInput {
   OR: [ImageUrlWhereInput!]
   NOT: [ImageUrlWhereInput!]
   id: IDFilter
-  linkToBinouImage: StringFilter
+  linkToImage: StringFilter
 }
 
 input ImageUrlOrderByInput {
   id: OrderDirection
-  linkToBinouImage: OrderDirection
+  linkToImage: OrderDirection
 }
 
 input ImageUrlUpdateInput {
-  linkToBinouImage: String
+  linkToImage: String
 }
 
 input ImageUrlUpdateArgs {
@@ -112,7 +112,7 @@ input ImageUrlUpdateArgs {
 }
 
 input ImageUrlCreateInput {
-  linkToBinouImage: String
+  linkToImage: String
 }
 
 type History {
