@@ -89,7 +89,11 @@ export const Field = ({
             alignItems: "center",
           }}
         >
-          <img src={value} alt="Image not found." />
+          <img
+            src={value}
+            style={{ maxHeight: "33vh" }}
+            alt="Image not found."
+          />
         </div>
       )}
     </FieldContainer>
